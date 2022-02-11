@@ -2,12 +2,6 @@ import React, { useState } from "react";
 
 const TextForm = (props) => {
   const [text, setText] = useState("");
-
-  const [mystyle, setmyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-  const [mytext, setmytext] = useState("Enable Dark Mode");
   const handleupClick = () => {
     let textnew = text.toUpperCase();
     setText(textnew);
@@ -32,32 +26,15 @@ const TextForm = (props) => {
     let textnew = text.toLowerCase();
     setText(textnew);
   };
-  const Enable = () => {
-    if (mystyle.color === "black") {
-      setmyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-
-      setmytext("Enable Light Mode");
-    } else {
-      setmyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-
-      setmytext("Enable Dark Mode");
-    }
-  };
 
   return (
     <>
-      <div className="container">
+      <div className="container"style={{color:props.mode==='dark'?'white':'#042743'}}>
         <h1>{props.heading}</h1>
-        <div className="mb-5" style={mystyle}>
+        <div className="mb-5">
           <textarea
-            style={mystyle}
             className="form-control"
+            style={{backgroundColor:props.mode==='dark'?'grey':'white',color:props.mode==='dark'?'white':'#042743'}}
             id="myBox"
             value={text}
             onChange={handleOnChange}
@@ -74,9 +51,6 @@ const TextForm = (props) => {
           <button className="btn btn-primary mx-1" onClick={handleClearclick}>
             Clear Text
           </button>
-          <button className="btn btn-primary mx-1" onClick={Enable}>
-            {mytext}
-          </button>
           <button className="btn btn-primary mx-1" onClick={copy}>
             Copy to Clipboard
           </button>
@@ -90,7 +64,7 @@ const TextForm = (props) => {
         <p>{text.split(" ").length} words and { text.length} characters</p>
         <p>{0.008 * text.split(" ").length} Miniutes to read {text.split(" ").length} word</p>
         <h2 className="head mt-2">Preview</h2>
-        <p>{text}</p>
+        <p>{text.length>0?text:"Enter in the textbox to preview it here"}</p>
       </div>
       </div>
     </>
