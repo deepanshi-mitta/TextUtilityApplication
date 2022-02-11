@@ -19,6 +19,15 @@ const TextForm = (props) => {
     let newText = "";
     setText(newText);
   };
+  const copy=()=>{
+    var text=document.getElementById('myBox');
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  };
+  const space=()=>{
+    let newText=text.split(/[ ]+/);
+    setText(newText.join(" "));
+  }
   const handleclick = () => {
     let textnew = text.toLowerCase();
     setText(textnew);
@@ -56,17 +65,23 @@ const TextForm = (props) => {
           ></textarea>
         </div>
         <div>
-          <button className="btn btn-primary mx-4" onClick={handleupClick}>
+          <button className="btn btn-primary mx-1" onClick={handleupClick}>
             Convert to Uppercase
           </button>
-          <button className="btn btn-primary " onClick={handleclick}>
+          <button className="btn btn-primary mx-1" onClick={handleclick}>
             Convert to LowerCase
           </button>
-          <button className="btn btn-primary mx-4" onClick={handleClearclick}>
+          <button className="btn btn-primary mx-1" onClick={handleClearclick}>
             Clear Text
           </button>
           <button className="btn btn-primary mx-1" onClick={Enable}>
             {mytext}
+          </button>
+          <button className="btn btn-primary mx-1" onClick={copy}>
+            Copy to Clipboard
+          </button>
+          <button className="btn btn-primary mx-1" onClick={space}>
+            Remove Extra Spaces
           </button>
         </div>
       
